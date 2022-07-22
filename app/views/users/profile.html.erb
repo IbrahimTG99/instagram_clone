@@ -1,0 +1,28 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-4'>
+    </div>
+    <div class='col-8'>
+      <h1> <%=@user.full_name%> </h1>
+      <%= link_to "Edit Profile", edit_user_registration_path(current_user.username), class: "btn btn-primary" %>
+      <div class='profile stats'> <%=@user.posts.count%> posts</div>
+      <div class='profile stats'> <%=@user.followers%> followers</div>
+      <div class='profile stats'> <%=@user.following%> following</div>
+    </div>
+  </div>
+
+  <div class='row'>
+      <%@posts.each do |post|%>
+        <div class='col-4'>
+          <div class='post'>
+          <%= image_tag post.image.url, class: 'img img-fluid'%>
+          </div>
+
+          <div class='caption'>
+            <h6> <%=post.user.username%> </h6>
+            <p> <%=post.caption%> </p>
+          </div>
+        </div>
+      <%end%>
+  </div>
+</div>
