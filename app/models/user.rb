@@ -4,8 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :posts
-  has_many :likes
+  has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+
+  def liked?(post)
+    likes.where(post_id: post.id).exists?
+  end
 
   def full_name
     "#{first_name} #{last_name}"
