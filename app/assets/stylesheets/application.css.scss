@@ -16,3 +16,30 @@
  */
 
 @import "font-awesome";
+
+.follow-btn {
+  text-transform: uppercase;
+  border-color: #4090db;
+  color: #4090db;
+  margin-left: 20px;
+  &:visited,
+  &:focus,
+  &:hover {
+    border-color: #2d6396;
+    color: #2d6396;
+  }
+}
+.unfollow-btn {
+  text-transform: uppercase;
+  border-color: #66bd2b;
+  background-color: #66bd2b;
+  color: white;
+  margin-left: 20px;
+  &:visited,
+  &:focus,
+  &:hover {
+    border-color: #47821f;
+    background-color: #47821f;
+    color: white;
+  }
+}
