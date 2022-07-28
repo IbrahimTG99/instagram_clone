@@ -30,6 +30,19 @@
               <%= time_ago_in_words post.created_at%> ago
             </small>
           </div>
+          <div class="comment-box">
+            <div class="comment-form">
+              <%= form_for [post, Comment.new] do |f|%>
+                <%= f.text_field :content, class:"form-control" %>
+                <%= f.submit "Comment", class:"btn btn-primary" %>
+              <% end %>
+            </div>
+            <div class="comment-list">
+              <% if post.comments.exists? %>
+                <%= render post.comments %>
+              <% end %>
+            </div>
+          </div>
         </div>
       <%end%>
     </div>

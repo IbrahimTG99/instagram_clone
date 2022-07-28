@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   # 'follows' relationship objects where the user is being followed.
   has_many :follower_relationships, foreign_key: :following_id, class_name: :Follow, dependent: :destroy,
                                     inverse_of: :following

@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   post ':username/unfollow_user', to: 'relationships#unfollow_user', as: :unfollow_user
   root to: 'users#index'
 
-  resources :posts, only: %i[new create show] do
+  resources :posts do
     resources :likes, only: %i[new create destroy], shallow: true
+    resources :comments, shallow: true
   end
 end

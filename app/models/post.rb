@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   validates :image, presence: true
   belongs_to :user
   has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   # defining scope using lamba function that returns followed users posts
   scope :of_followed_users, ->(following_users) { where user_id: following_users }
 
