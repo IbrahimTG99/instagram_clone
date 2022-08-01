@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts, dependent: :destroy
+  has_many :stories, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   # 'follows' relationship objects where the user is being followed.
@@ -16,13 +17,22 @@ class User < ApplicationRecord
   has_many :following_relationships, foreign_key: :follower_id, class_name: :Follow, dependent: :destroy,
                                      inverse_of: :follower
   has_many :following, through: :following_relationships, source: :following
-
+  has_one_attached :avatar, dependent: :destroy
+  after_commit :add_default_avatar, on: %i[create update]
   def liked?(post)
     likes.where(post_id: post.id).exists?
   end
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def avatar_thumbnail
+    if avatar.attached?
+      avatar.variant(resize: '150x150')
+    else
+      'default_profile.jpg'
+    end
   end
 
   def follow(user_id)
@@ -43,5 +53,17 @@ class User < ApplicationRecord
 
   def following_count
     following_relationships.count
+  end
+
+  private
+
+  def add_default_avatar
+    return if avatar.attached?
+
+    avatar.attach(
+      io: File.open(Rails.root.join('app/assets/images/default_profile.jpg')),
+      filename: 'default_profile.jpg',
+      content_type: 'image/jpg'
+    )
   end
 end

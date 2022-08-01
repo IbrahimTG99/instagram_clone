@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @posts = Post.of_followed_users(current_user.following + [current_user])
     following_ids = current_user.following.map(&:id)
     @follower_suggestions = User.where.not(id: following_ids).limit(4)
+    @stories = Story.all
   end
 
   def profile

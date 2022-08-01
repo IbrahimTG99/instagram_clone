@@ -36,3 +36,32 @@
     color: red;
   }
 }
+
+.post-square {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  background-size: cover !important;
+}
+
+.post-stats {
+  width: 100%;
+  height: 100%;
+  background: rgba($color: #000000, $alpha: 0.5);
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  display: none;
+
+  .inner-post-stats {
+    padding-top: 45%;
+  }
+}
+
+.post:hover {
+  .post-stats {
+    display: block;
+  }
+}

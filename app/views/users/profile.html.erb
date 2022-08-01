@@ -1,6 +1,7 @@
 <div class='container'>
   <div class='row'>
     <div class='col-4'>
+      <%=image_tag @user.avatar_thumbnail, class:"img-circle profile-pic"%>
     </div>
     <div class='col-8'>
       <h1> <%=@user.full_name%> </h1>
@@ -24,15 +25,21 @@
           <%=@user.following_count%> following
         </div>
       </div>
-
     </div>
   </div>
   <br>
   <div class='row profile-posts'>
       <%@posts.each do |post|%>
         <div class='col-4'>
-          <div class='post'>
-          <%= image_tag post.image.url, class: "img img-fluid"%>
+          <div class='post post-square' style="background: url(<%= post.image.url %>) no-repeat center top">
+            <%= link_to post_path(post) do %>
+              <div class="post-stats">
+                <div class="inner-post-stats">
+                  <i class="fa fa-heart"></i> <%= post.likes_count%>
+                  <i class="fa fa-comment m-l-15"></i> <%= post.comments_count%>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       <%end%>

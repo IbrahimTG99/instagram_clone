@@ -1,0 +1,17 @@
+<div class="post">
+  <div class="post-meta">
+    <%= link_to story.user.username, profile_path(story.user.username), class:"text-dark" %>
+  </div>
+
+  <%= image_tag story.image, class:"img  img-fluid", style:"inline-size: -moz-available;"%>
+
+  <div class="post-details">
+    <p><strong>
+      <%= link_to story.user.username, profile_path(story.user.username), class:"text-dark"%>
+    </strong></p>
+    <%= simple_format story.caption%>
+    <small class="text-muted">
+      <%= time_ago_in_words story.created_at%> ago
+    </small>
+  </div>
+</div>

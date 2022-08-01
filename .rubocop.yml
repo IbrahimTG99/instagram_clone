@@ -14,6 +14,9 @@ AllCops:
     - "bin/**/*"
   # NewCops: enable
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Layout/LineLength:
   Max: 120
 

@@ -1,50 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <% @posts.each do |post|%>
-        <div class="post">
-          <div class="post-meta">
-            <%= link_to post.user.username, profile_path(post.user.username), class:"text-dark" %>
-          </div>
-
-          <%= image_tag post.image.url, class:"img  img-fluid"%>
-          <div class="post-details">
-            <div class="post-actions">
-
-              <i class="fa fa-2x fa-heart post-like like-<%= post.id %> <%= 'active' if current_user.liked? post %>">
-                <%= link_to 'like', post_likes_path(post),
-                method: :post, remote: true, class:"btn" %>
-              </i>
-
-              <i class="fa fa-2x fa-comment post-comment"></i>
-            </div>
-
-            <p><strong id="post-<%= post.id %>-likes">
-              <%= post.likes_count %> likes
-            </strong></p>
-            <p><strong>
-              <%= link_to post.user.username, profile_path(post.user.username), class:"text-dark"%>
-            </strong></p>
-            <%= simple_format post.caption%>
-            <small class="text-muted">
-              <%= time_ago_in_words post.created_at%> ago
-            </small>
-          </div>
-          <div class="comment-box">
-            <div class="comment-form">
-              <%= form_for [post, Comment.new] do |f|%>
-                <%= f.text_field :content, class:"form-control" %>
-                <%= f.submit "Comment", class:"btn btn-primary" %>
-              <% end %>
-            </div>
-            <div class="comment-list">
-              <% if post.comments.exists? %>
-                <%= render post.comments %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <%end%>
+      <h2>Stories...</h2>
+      <%= render @stories%>
+      <br>
+      <h2>Posts...</h2>
+      <%= render @posts %>
     </div>
 
     <div class="col-4">
@@ -59,10 +20,12 @@
         </div>
       </div>
       <br>
+
       <div class= "follower-suggestions">
         <%= link_to "View All", "#", class:"float-right text-dark"%>
         <p class="text-muted">suggestions for you</p>
         <%= render "users/follower_suggestions"%>
       </div>
+    </div>
   </div>
 </div>

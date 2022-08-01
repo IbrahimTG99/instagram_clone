@@ -6,8 +6,8 @@ class CommentsController < ApplicationController
     @comment.user = current_user if user_signed_in?
 
     if @comment.save
-      flash[:success] = 'You commented the hell out of that post!'
-      redirect_to root_path
+      flash[:success] = 'You commented on that post!'
+      redirect_back(fallback_location: root_path)
     else
       flash[:alert] = 'Check the comment form, something went wrong.'
       render root_path
