@@ -48,10 +48,19 @@ gem 'cloudinary'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # uploading images
-gem 'paperclip'
+# gem 'paperclip'
 
 # fonts
 gem 'font-awesome-sass', '~> 6.1.1'
+
+# jobs
+gem 'resque'
+gem 'resque-scheduler'
+
+# auto completeing search
+
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

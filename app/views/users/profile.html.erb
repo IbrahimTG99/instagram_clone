@@ -1,13 +1,15 @@
 <div class='container'>
   <div class='row'>
     <div class='col-4'>
-      <%=image_tag @user.avatar_thumbnail, class:"img-circle profile-pic"%>
+      <%= cl_image_tag(@user.avatar.key, width: 150, height: 150, crop: :fill, class:"img-circle profile-pic") %>
     </div>
     <div class='col-8'>
       <h1> <%=@user.full_name%> </h1>
       <span>
         <% if can_edit_profile? @user.id %>
-          <%= link_to "Edit Profile", edit_user_registration_path(current_user.username), class: "btn btn-secondary" %>
+          <%= link_to edit_user_registration_path(current_user.username), class: "btn btn-outline-secondary" do %>
+            <i class="fas fa-edit"></i> Edit Profile
+          <% end %>
         <% elsif following? @user.id %>
           <%= link_to "Following", unfollow_user_path, remote: true, class: "btn unfollow-btn", id: 'unfollow-btn-'+@user.username, method: :post%>
         <% else %>
@@ -31,7 +33,7 @@
   <div class='row profile-posts'>
       <%@posts.each do |post|%>
         <div class='col-4'>
-          <div class='post post-square' style="background: url(<%= post.image.url %>) no-repeat center top">
+          <div class='post post-square' style="background: url(<%= cl_image_path(post.images[0].key) %>) no-repeat center top">
             <%= link_to post_path(post) do %>
               <div class="post-stats">
                 <div class="inner-post-stats">

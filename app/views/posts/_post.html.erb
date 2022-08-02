@@ -1,16 +1,18 @@
 <div class="post">
   <div class="post-meta">
+    <%= cl_image_tag(post.user.avatar.key, width: 50, height: 50, crop: :fill, class:"img-circle profile-pic") if post.images_attachments %>
     <%= link_to post.user.username, profile_path(post.user.username), class:"text-dark" %>
   </div>
-
-  <%= image_tag post.image.url, class:"img  img-fluid", style:"inline-size: -moz-available;"%>
+  <% post.images.each do |image| %>
+    <%= cl_image_tag(image.key, class:"img  img-fluid", style:"inline-size: -moz-available;")%>
+  <%end%>
 
   <div class="post-details">
     <div class="post-actions">
-      <i class="fa fa-2x fa-heart post-like like-<%= post.id %> <%= 'active' if current_user.liked? post %>">
-        <%= link_to 'like', post_likes_path(post),
-        method: :post, remote: true, class:"btn" %>
-      </i>
+      <%= link_to post_likes_path(post), method: :post, remote: true do %>
+        <i class="fa fa-2x fa-heart post-like like-<%= post.id %> <%= 'active' if current_user.liked? post %>"></i>
+      <% end %>
+
       <%= link_to post_path(post.id) do %>
         <i class="fa fa-2x fa-comment post-comment"></i>
       <% end %>
@@ -30,7 +32,7 @@
 
   <div class="comment-box">
     <div class="comment-form">
-      <%= render "comments/form", post: post %>
+      <%= render "comments/form", post: post%>
     </div>
 
     <div class="comment-list">
@@ -39,4 +41,9 @@
       <% end %>
     </div>
   </div>
+  <% if can_edit_post? post.id %>
+    <%= link_to 'edit', edit_post_path(post), class: 'btn btn-outline-secondary' %>
+    <%= link_to 'delete', post, method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure?' } %>
+  <% end %>
+
 </div>

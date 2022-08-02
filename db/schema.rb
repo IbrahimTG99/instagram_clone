@@ -71,10 +71,6 @@ ActiveRecord::Schema.define(version: 2022_08_01_092507) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.bigint "image_file_size"
-    t.datetime "image_updated_at"
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"

@@ -1,11 +1,16 @@
-<div class="comment">
+<div class="comment-<%=comment.id.to_s%>">
   <div class="comment-meta">
     <%= link_to comment.user.username,profile_path(comment.user.username), class:"text-dark" %>
   </div>
+  <% if can_edit_comment? comment.id %>
+    <%= link_to 'Delete', comment_path(comment.id), method: :delete, class:"btn btn-sm btn-outline-danger float-end delete-btn-"+comment.id.to_s %>
+    <%= link_to 'Edit', edit_comment_path(comment.id), remote: true, class:"btn btn-sm btn-outline-primary float-end edit-btn-"+comment.id.to_s %>
+  <% end %>
+
   <div class="d-flex justify-content-between comment-content">
     <%= simple_format comment.content %>
     <small class="text-muted">
-      <%= time_ago_in_words comment.created_at%> ago
+      <%= time_ago_in_words comment.updated_at%> ago
     </small>
   </div>
 </div>

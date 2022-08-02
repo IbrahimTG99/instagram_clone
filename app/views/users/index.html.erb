@@ -2,15 +2,18 @@
   <div class="row">
     <div class="col-8">
       <h2>Stories...</h2>
-      <%= render @stories%>
       <br>
+      <%= render @stories%>
+      <hr class="border-2 border-top">
       <h2>Posts...</h2>
+      <br>
       <%= render @posts %>
     </div>
 
     <div class="col-4">
       <div class="card">
         <div class="card-body">
+          <%= cl_image_tag(current_user.avatar.key, width: 100, height: 100, crop: :fill, class:"img-circle profile-pic float-end") %>
           <h5 class="card-title">
             <%= current_user.username %>
           </h5>
@@ -22,7 +25,7 @@
       <br>
 
       <div class= "follower-suggestions">
-        <%= link_to "View All", "#", class:"float-right text-dark"%>
+        <%= link_to "View All", "#", class:"float-end text-dark"%>
         <p class="text-muted">suggestions for you</p>
         <%= render "users/follower_suggestions"%>
       </div>

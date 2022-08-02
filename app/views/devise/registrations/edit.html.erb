@@ -2,7 +2,12 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
+  <div class="form-group">
+    <%=f.label :avatar %>
+    <p><%= cl_image_tag(@user.avatar.key, width: 150, height: 150, crop: :fill, class:"img-circle profile-pic") %></p>
+    <br>
+    <%= f.file_field :avatar, direct_upload: true, class:"form-control" %>
+  </div>
   <div class="form-group">
     <%= f.label :username%><br />
     <%= f.text_field :username, class: 'form-control', autofocus: true, :readonly => true %>
@@ -23,11 +28,6 @@
     <%= f.email_field :email, class: 'form-control', autocomplete: "email" %>
   </div>
 
-  <div class="form-group">
-    <%=f.label :avatar %>
-    <%= image_tag(resource.avatar_thumbnail) if resource.avatar.attached? %>
-    <%= f.file_field :avatar, direct_upload: true, class:"form-control" %>
-  </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -63,12 +63,12 @@
   </div>
   <br />
   <div class="actions">
-    <%= f.submit "Update", class: " btn btn-success"%>
+    <%= f.submit "Update", class: " btn btn-outline-success"%>
   </div>
 <% end %>
 <br />
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger float-end" %></p>
 
-<%= link_to "Back", :back, class: "btn btn-dark" %>
+<%= link_to "Back", :back, class: "btn btn-outline-dark" %>

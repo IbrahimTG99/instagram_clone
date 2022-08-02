@@ -2,12 +2,15 @@
   <div class="row">
     <div class="col-8">
       <div class="post">
-        <%= image_tag @post.image.url,style:"inline-size: -moz-available;", class:"img  img-fluid" if @post.image.exists? %>
+        <% @post.images.each do |image| %>
+          <%= cl_image_tag(image.key, class:"img  img-fluid", style:"inline-size: -moz-available;")%>
+        <%end%>
       </div>
     </div>
 
     <div class="col-4">
       <div class="post-meta">
+        <%= cl_image_tag(@post.user.avatar.key, width: 50, height: 50, crop: :fill, class:"img-circle profile-pic") %>
         <%= link_to @post.user.username, profile_path(@post.user.username), class:"text-dark" %>
       </div>
       <div class="comment-box">

@@ -2,11 +2,11 @@
   <div class="recommended-followers">
     <div class="row">
       <div class="col-2">
-        <%# <%= image_tag user.avatar.url, class:"img-fluid" %>
+        <%= cl_image_tag(user.avatar.key, width: 50, height: 50, crop: :fill, class:"img-circle profile-pic") %>
       </div>
       <div class="col-10">
         <%= link_to user.username, profile_path(user.username), class:"text-dark" %>
-        <div class="float-right">
+        <div class="float-end">
           <% if following? user.id %>
             <%= link_to "Following", unfollow_user_path(user.username), remote: true, class: "btn unfollow-btn", id: 'unfollow-btn-'+user.username, method: :post%>
           <% else %>

@@ -1,5 +1,6 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: %i[show destroy]
+
   def create
     @story = Story.create(story_params)
     @story.user = current_user if user_signed_in?
@@ -16,7 +17,10 @@ class StoriesController < ApplicationController
 
   def show; end
 
-  def destroy; end
+  def destroy
+    @story.destroy
+    redirect_to root_path, flash: { success: 'story deleted!' }
+  end
 
   private
 

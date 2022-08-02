@@ -3,11 +3,11 @@
     <%=f.label :image%>
     <%= f.file_field :image, class:"form-control" %>
   </div>
-
+  <br>
   <div class="form-group">
     <%=f.label :caption%>
     <%= f.text_area :caption, class:"form-control" %>
   </div>
 
-  <%= f.submit 'Save story', class: 'btn btn-success' %>
+  <%= f.submit 'Save story', class: 'btn btn-outline-success' %>
 <%end%>

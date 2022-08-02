@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :likes, only: %i[new create destroy], shallow: true
-    resources :comments, shallow: true
+    resources :comments, only: %i[new create destroy edit update], shallow: true
   end
   resources :stories, only: %i[new create show destroy]
 end

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     # posts of followed users
     @posts = Post.of_followed_users(current_user.following + [current_user])
     following_ids = current_user.following.map(&:id)
-    @follower_suggestions = User.where.not(id: following_ids).limit(4)
+    @follower_suggestions = User.where.not(id: following_ids).limit(4) - [current_user]
     @stories = Story.all
   end
 
@@ -17,5 +17,10 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find_by(username: params[:username])
+  end
+
+  def search_user
+    @find = User.where('username LIKE ?', "%#{params[:q]}%")
+    render json: @find
   end
 end
