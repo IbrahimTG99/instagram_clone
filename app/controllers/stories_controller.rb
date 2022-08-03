@@ -1,6 +1,10 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: %i[show destroy]
 
+  def index
+    redirect_to root_path
+  end
+
   def create
     @story = Story.create(story_params)
     @story.user = current_user if user_signed_in?

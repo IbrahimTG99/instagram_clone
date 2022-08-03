@@ -1,5 +1,9 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
+  def index
+    redirect_to root_path
+  end
+
   def create
     @post = Post.create(post_params)
     @post.user = current_user if user_signed_in?
