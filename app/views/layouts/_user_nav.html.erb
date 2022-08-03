@@ -1,3 +1,11 @@
+<div role="search">
+  <%= form_tag root_path, class: 'navbar-form', method: :get do %>
+    <div class="input-group">
+      <%= text_field_tag :query, params[:query], id: 'typeahead', class: 'search-input form-control', placeholder: 'Search users' %>
+    </div>
+  <% end %>
+</div>
+
 <li class="nav-item">
   <%= link_to root_path, class: "nav-link active" do %>
     <i class="fas fa-home"></i> Home

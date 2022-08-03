@@ -15,4 +15,5 @@
 //= require activestorage
 //= require bootstrap
 //= require jquery
+//= require twitter/typeahead.min
 //= require_tree .

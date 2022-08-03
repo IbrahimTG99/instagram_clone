@@ -54,13 +54,11 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'font-awesome-sass', '~> 6.1.1'
 
 # jobs
-gem 'resque'
-gem 'resque-scheduler'
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
 
-# auto completeing search
-
-
-
+# search
+gem 'twitter-typeahead-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'profile/:username' => 'users#profile', as: :profile
   post ':username/follow_user', to: 'relationships#follow_user', as: :follow_user
   post ':username/unfollow_user', to: 'relationships#unfollow_user', as: :unfollow_user
+  get 'search_user/:q' => 'users#search_user', as: :search_user
   root to: 'users#index'
 
   resources :posts do
