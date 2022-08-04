@@ -61,7 +61,7 @@ class User < ApplicationRecord
     return if avatar.attached?
 
     avatar.attach(
-      io: File.open(Rails.root.join('app/assets/images/default_profile.jpg')),
+      io: File.open(Rails.root.join('default_profile.jpg')),
       filename: 'default_profile.jpg',
       content_type: 'image/jpg'
     )

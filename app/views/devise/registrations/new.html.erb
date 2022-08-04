@@ -28,7 +28,7 @@
     <%if resource.avatar.attached?%>
       <p><%= cl_image_tag(@user.avatar.key, width: 150, height: 150, crop: :fill, class:"img-circle profile-pic") %></p>
     <%else%>
-      <%=image_tag("/default_profile.jpg", class:"img-circle profile-pic")%>
+      <%=image_tag("default_profile.jpg", class:"img-circle profile-pic")%>
     <%end%>
     <%= f.file_field :avatar, direct_upload: true, class:"form-control" %>
   </div>
