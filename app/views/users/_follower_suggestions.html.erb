@@ -7,13 +7,29 @@
       <div class="col-10">
         <%= link_to user.username, profile_path(user.username), class:"text-dark" %>
         <div class="float-end">
-          <% if following? user.id %>
-            <%= link_to "Following", unfollow_user_path(user.username), remote: true, class: "btn unfollow-btn", id: 'unfollow-btn-'+user.username, method: :post%>
-          <% else %>
-            <%= link_to "Follow", follow_user_path(user.username), remote: true, class: "btn follow-btn", id: 'follow-btn-'+user.username, method: :post%>
-          <% end %>
+          <%= link_to "Follow", follow_user_path(user.username), remote: true, class: "btn follow-btn", id: 'follow-btn-'+user.username, method: :post%>
         </div>
         <p class="text-muted"><%= user.created_at > 2.days.ago ? "New here" : "Followed by " %></p>
+      </div>
+  </div>
+<%end%>
+<% if @follower_suggestions.empty? %>
+  <p class="text-muted">No suggestions</p>
+<% end %>
+
+<% @pending_follows.each do |follow| %>
+  <div class="recommended-followers">
+    <div class="row">
+      <div class="col-2">
+        <%= cl_image_tag(follow.follower.avatar.key, width: 50, height: 50, crop: :fill, class:"img-circle profile-pic") %>
+      </div>
+      <div class="col-10">
+        <%= link_to follow.follower.username, profile_path(follow.follower.username), class:"text-dark" %>
+        <div class="float-end">
+          <%= link_to "Accept", accept_follow_path(follow.follower.username), remote: true, class: "btn follow-btn", id: 'follow-btn-'+follow.follower.username, method: :post%>
+          <%= link_to "Cancel", unfollow_user_path(follow.follower.username), remote: true, class: "btn unfollow-btn", id: 'unfollow-btn-'+follow.follower.username, method: :post%>
+        </div>
+        <p class="text-muted">Pending</p>
       </div>
   </div>
 <%end%>

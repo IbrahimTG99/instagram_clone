@@ -1,29 +1,33 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="feild">
-    <%= f.label :username%><br />
-    <%= f.text_field :username, autofocus: true %>
+  <div class="form-group">
+    <%= f.label :username%>
+    <%= f.text_field :username, class: 'form-control', autofocus: true %>
+    <br />
   </div>
 
-  <div class="feild">
+  <div class="form-group">
     <%= f.label :first_name%>
-    <%= f.text_field :first_name %>
+    <%= f.text_field :first_name, class: 'form-control' %>
+    <br />
   </div>
 
-  <div class="feild">
+  <div class="form-group">
     <%= f.label :last_name%>
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, class: 'form-control' %>
+    <br />
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+    <%= f.email_field :email, class: 'form-control', autocomplete: "email" %>
+    <br />
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%=f.label :avatar %>
     <%if resource.avatar.attached?%>
       <p><%= cl_image_tag(@user.avatar.key, width: 150, height: 150, crop: :fill, class:"img-circle profile-pic") %></p>
@@ -31,23 +35,27 @@
       <%=image_tag("default_profile.jpg", class:"img-circle profile-pic")%>
     <%end%>
     <%= f.file_field :avatar, direct_upload: true, class:"form-control" %>
+    <br />
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, class: 'form-control', autocomplete: "new-password" %>
+    <br />
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "new-password" %>
+    <br />
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: " btn btn-outline-success" %>
+    <br />
   </div>
 <% end %>
 

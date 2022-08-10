@@ -1,0 +1,5 @@
+$("#follow-btn-<%=@user.username%>")
+.attr("class", "btn unfollow-btn")
+.text("Pending")
+.attr("href", "<%= unfollow_user_path %>")
+.attr("id", "unfollow-btn-<%=@user.username%>");

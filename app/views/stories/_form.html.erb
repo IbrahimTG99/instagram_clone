@@ -1,7 +1,7 @@
-<%=form_for @story, html: {multipart: true} do |f|%>
+<%=form_for @story, html: {multipart: true}, validate: true do |f|%>
   <div class="form-group">
     <%=f.label :image%>
-    <%= f.file_field :image, class:"form-control" %>
+    <%= f.file_field :image, direct_upload: true, class:"form-control", accept: 'image/*' %>
   </div>
   <br>
   <div class="form-group">

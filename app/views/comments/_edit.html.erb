@@ -2,7 +2,7 @@
   <div class="comment-meta">
     <%= link_to @comment.user.username,profile_path(@comment.user.username), class:"text-dark" %>
   </div>
-  <%= form_for(@comment, remote: true) do |f|%>
+  <%= form_for(@comment, remote: true, validate: true) do |f|%>
     <div class="input-group">
       <%= f.text_field :content, class:"form-control" %>
       <div class="input-group-append">

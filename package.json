@@ -1,5 +1,7 @@
 {
   "name": "instagram_clone",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@client-side-validations/client-side-validations": "^0.3.0"
+  }
 }

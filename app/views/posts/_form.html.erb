@@ -1,7 +1,7 @@
-<%=form_for @post, html: {multipart: true} do |f|%>
+<%=form_for @post, html: {multipart: true}, validate: true do |f|%>
   <div class="form-group">
     <%=f.label "images (max 10)" %>
-    <%= f.file_field :images, multiple: true, direct_upload: true, class:"form-control" %>
+    <%= f.file_field :images, multiple: true, direct_upload: true, class:"form-control", accept: 'image/*' %>
   </div>
   <br>
   <div class="form-group">

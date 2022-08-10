@@ -16,4 +16,6 @@
 //= require bootstrap
 //= require jquery
 //= require twitter/typeahead.min
+//= require('@client-side-validations/client-side-validations')
+//= require rails.validations
 //= require_tree .

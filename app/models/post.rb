@@ -1,7 +1,8 @@
 class Post < ApplicationRecord
   default_scope { order created_at: :desc }
   validates :user_id, presence: true
-  validates :images, presence: true, length: { minimum: 1 , maximum: 10 }
+  validates :images, presence: true
+  validate :images_format
 
   belongs_to :user
   has_many :likes, dependent: :destroy
@@ -13,5 +14,17 @@ class Post < ApplicationRecord
 
   def total_likes
     likes.count
+  end
+
+  private
+
+  def images_format
+    return if images.attached?
+
+    images.each do |image|
+      unless image.content_type.in?(%w[image/jpeg image/png image/gif image/jpg])
+        errors.add(:images, 'must be a JPEG or PNG')
+      end
+    end
   end
 end
