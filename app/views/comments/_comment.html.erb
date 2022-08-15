@@ -1,9 +1,10 @@
 <div class="comment-<%=comment.id.to_s%>">
   <div class="comment-meta">
+    <%= cl_image_tag(comment.user.avatar.key, width: 30, height: 30, crop: :fill, class:"img-circle profile-pic") %>
     <%= link_to comment.user.username,profile_path(comment.user.username), class:"text-dark" %>
   </div>
-  <% if can_edit_comment? comment.id %>
-    <%= link_to 'Delete', comment_path(comment.id), method: :delete, class:"btn btn-sm btn-outline-danger float-end delete-btn-"+comment.id.to_s %>
+  <% if policy(comment).update? %>
+    <%= link_to 'Delete', comment_path(comment.id), method: :delete, remote: true, class:"btn btn-sm btn-outline-danger float-end delete-btn-"+comment.id.to_s %>
     <%= link_to 'Edit', edit_comment_path(comment.id), remote: true, class:"btn btn-sm btn-outline-primary float-end edit-btn-"+comment.id.to_s %>
   <% end %>
 

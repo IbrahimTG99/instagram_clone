@@ -26,11 +26,13 @@
       </div>
       <div class="post-details">
         <div class="post-actions">
-          <i class="fa fa-2x fa-heart post-like like-<%= @post.id %> <%= 'active' if current_user.liked? @post %>">
-            <%= link_to 'like', post_likes_path(@post),
-            method: :post, remote: true, class:"btn" %>
-          </i>
-          <i class="fa fa-2x fa-comment post-comment"></i>
+          <%= link_to post_likes_path(@post), method: :post, remote: true do %>
+            <i class="fa fa-2x fa-heart post-like like-<%= @post.id %> <%= 'active' if current_user.liked? @post %>"></i>
+          <% end %>
+
+          <%= link_to post_path(@post.id) do %>
+            <i class="fa fa-2x fa-comment post-comment"></i>
+          <% end %>
         </div>
 
         <p><strong id="post-<%= @post.id %>-likes">
