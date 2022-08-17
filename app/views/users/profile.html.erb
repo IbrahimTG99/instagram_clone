@@ -11,11 +11,11 @@
             <i class="fas fa-edit"></i> Edit Profile
           <% end %>
         <% elsif following? @user.id %>
-          <%= link_to "Following", unfollow_user_path, remote: true, class: "btn unfollow-btn", id: 'unfollow-btn-'+@user.username, method: :post%>
+          <%= link_to "Following", unfollow_user_path(@user), remote: true, class: "btn unfollow-btn", id: 'unfollow-btn-'+@user.username, method: :post%>
         <% elsif pending? @user.id %>
-          <%= link_to "Pending", unfollow_user_path, remote: true, class: "btn unfollow-btn", id: 'unfollow-btn-'+@user.username, method: :post%>
+          <%= link_to "Pending", unfollow_user_path(@user), remote: true, class: "btn unfollow-btn", id: 'unfollow-btn-'+@user.username, method: :post%>
         <% else %>
-          <%= link_to "Follow", follow_user_path, remote: true, class: "btn follow-btn", id: 'follow-btn-'+@user.username, method: :post%>
+          <%= link_to "Follow", follow_user_path(@user), remote: true, class: "btn follow-btn", id: 'follow-btn-'+@user.username, method: :post%>
         <% end %>
       </span>
       <div class="row profile-stats">

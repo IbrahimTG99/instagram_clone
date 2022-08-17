@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-
   validates :username, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9_]+\z/ }
   validates :first_name, presence: true, length: { minimum: 3, maximum: 20 }, format: { with: /\A[a-zA-Z]+\z/ }
   validates :last_name, presence: true, length: { minimum: 3, maximum: 20 }, format: { with: /\A[a-zA-Z]+\z/ }
@@ -25,7 +24,6 @@ class User < ApplicationRecord
   has_many :following_relationships, foreign_key: :follower_id, class_name: :Follow, dependent: :destroy,
                                      inverse_of: :follower
   has_many :following, -> { Follow.accepted }, through: :following_relationships
-
 
   has_one_attached :avatar, dependent: :destroy
   after_commit :add_default_avatar, on: %i[create update]

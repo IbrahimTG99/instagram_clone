@@ -4,8 +4,7 @@ class Story < ApplicationRecord
 
   validates :image, presence: true
   scope :of_followed_users, ->(following_users) { where user_id: following_users }
-  validates_image :image
-
+  validate :image_format
 
   private
 
