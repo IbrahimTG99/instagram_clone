@@ -1,14 +1,13 @@
-<%=form_for @post, html: {multipart: true} do |f|%>
-
+<%=form_for @post, html: {multipart: true}, validate: true do |f|%>
   <div class="form-group">
-    <%=f.label :image%>
-    <%= f.file_field :image, class:"form-control" %>
+    <%=f.label "images (max 10)" %>
+    <%= f.file_field :images, multiple: true, direct_upload: true, class:"form-control", accept: 'image/*' %>
   </div>
-
+  <br>
   <div class="form-group">
     <%=f.label :caption%>
     <%= f.text_area :caption, class:"form-control" %>
   </div>
 
-  <%= f.submit 'Save Post', class: 'btn btn-success' %>
+  <%= f.submit 'Save Post', class: 'btn btn-outline-success' %>
 <%end%>

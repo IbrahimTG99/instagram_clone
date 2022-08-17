@@ -3,4 +3,6 @@
 
 require_relative 'config/application'
 
+task 'sidekiq:setup' => :environment
+
 Rails.application.load_tasks

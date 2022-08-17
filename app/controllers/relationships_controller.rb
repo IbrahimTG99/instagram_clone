@@ -7,7 +7,12 @@ class RelationshipsController < ApplicationController
       format.js do
         format.html { redirect_to root_path }
         @follower_count = @user.follower_count
-        render 'users/follow_user'
+        # check if user has a private account
+        if @user.private == true
+          render 'users/pending_follow'
+        else
+          render 'users/follow_user'
+        end
       end
     end
   end
@@ -21,6 +26,18 @@ class RelationshipsController < ApplicationController
       format.js do
         @follower_count = @user.follower_count
         render 'users/unfollow_user'
+      end
+    end
+  end
+
+  def accept_follow
+    @user = User.find_by! username: params[:username]
+    @relationship = current_user.follower_relationships.find_by! follower_id: @user.id
+    @relationship.update(status: true)
+    respond_to do |format|
+      format.js do
+        format.html { redirect_to root_path }
+        render 'users/follow_user'
       end
     end
   end

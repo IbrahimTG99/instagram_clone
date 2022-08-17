@@ -1,0 +1,21 @@
+<div class="post">
+  <div class="post-meta">
+    <%= cl_image_tag(story.user.avatar.key, width: 50, height: 50, crop: :fill, class:"img-circle profile-pic")%>
+    <%= link_to story.user.username, profile_path(story.user.username), class:"text-dark" %>
+  </div>
+
+  <%= cl_image_tag(story.image.key, class:"img  img-fluid", style:"inline-size: -moz-available;") if story.image_attachment%>
+
+  <div class="post-details">
+    <p><strong>
+      <%= link_to story.user.username, profile_path(story.user.username), class:"text-dark"%>
+    </strong></p>
+    <%= simple_format story.caption%>
+    <small class="text-muted">
+      <%= time_ago_in_words story.created_at%> ago
+    </small>
+  </div>
+  <% if can_edit_story? story.id %>
+    <%= link_to 'delete', story, method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</div>

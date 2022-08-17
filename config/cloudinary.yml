@@ -1,0 +1,11 @@
+development:
+  cloud_name: "dyf68ygvd"
+  api_key: "569939185793632"
+  api_secret: "16s6SivK_1vXPKUp_qyiw0aZrjg"
+  secure: true
+
+production:
+  cloud_name: "dyf68ygvd"
+  api_key: "569939185793632"
+  api_secret: "16s6SivK_1vXPKUp_qyiw0aZrjg"
+  secure: true

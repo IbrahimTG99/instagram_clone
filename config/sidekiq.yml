@@ -1,0 +1,4 @@
+:schedule:
+  remove_stories:
+    every: 5 minutes
+    class: RemoveStoriesWorker

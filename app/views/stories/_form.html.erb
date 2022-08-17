@@ -1,0 +1,13 @@
+<%=form_for @story, html: {multipart: true}, validate: true do |f|%>
+  <div class="form-group">
+    <%=f.label :image%>
+    <%= f.file_field :image, direct_upload: true, class:"form-control", accept: 'image/*' %>
+  </div>
+  <br>
+  <div class="form-group">
+    <%=f.label :caption%>
+    <%= f.text_area :caption, class:"form-control" %>
+  </div>
+
+  <%= f.submit 'Save story', class: 'btn btn-outline-success' %>
+<%end%>
