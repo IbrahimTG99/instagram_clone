@@ -1,25 +1,54 @@
-<%="#{@posts.size.to_s} posts found."%>
-<div class:"container">
-  <div class:"row">
-    <div class:"col-8">
+<div class="container">
+  <div class="row">
+    <div class="col-8">
       <% @posts.each do |post|%>
-        <div class:"card">
-          <div class:"card-body">
-            <h5 class:"card-title">
-              <%=post.user.username %>
-            </h5>
-            <p class:"card-text">
-              <%= post.caption %>
-            </p>
-            <%= image_tag post.image.url, class: 'img  img-fluid'%>
-            <p class:"card-text">
-              <small class:"text-muted">
-                <%= post.created_at.strftime("%b %d, %Y") %>
-              </small>
-            </p>
+        <div class="post">
+          <div class="post-meta">
+            <%= link_to post.user.username, profile_path(post.user.username), class:"text-dark" %>
+          </div>
+
+          <%= image_tag post.image.url, class:"img  img-fluid"%>
+          <div class="post-details">
+            <div class="post-actions">
+
+              <i class="fa fa-2x fa-heart post-like like-<%= post.id %> <%= 'active' if current_user.liked? post %>">
+                <%= link_to 'like', post_likes_path(post),
+                method: :post, remote: true, class:"btn" %>
+              </i>
+
+              <i class="fa fa-2x fa-comment post-comment"></i>
+            </div>
+
+            <p><strong id="post-<%= post.id %>-likes">
+              <%= post.likes_count %> likes
+            </strong></p>
+            <p><strong>
+              <%= link_to post.user.username, profile_path(post.user.username), class:"text-dark"%>
+            </strong></p>
+            <%= simple_format post.caption%>
+            <small class="text-muted">
+              <%= time_ago_in_words post.created_at%> ago
+            </small>
           </div>
         </div>
       <%end%>
     </div>
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= current_user.username %>
+          </h5>
+          <p class="card-text">
+            <%= current_user.full_name %>
+          </p>
+        </div>
+      </div>
+      <br>
+      <div class= "follower-suggestions">
+        <%= link_to "View All", "#", class:"float-right text-dark"%>
+        <p class="text-muted">suggestions for you</p>
+      </div>
   </div>
 </div>

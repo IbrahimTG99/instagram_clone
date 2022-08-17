@@ -5,7 +5,7 @@
   <%= link_to "New Post", new_post_path, class: "nav-link active"%>
 </li>
 <li class="nav-item">
-  <%= link_to "My profile", "#", class: "nav-link active"%>
+  <%= link_to "My profile", profile_path(current_user.username), class: "nav-link active"%>
 </li>
 <li class="nav-item">
   <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link active" %>
