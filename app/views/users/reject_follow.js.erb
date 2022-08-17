@@ -1,0 +1,7 @@
+$("#reject-btn-<%=@user.username%>")
+.attr("class", "btn unfollow-btn")
+.text("Rejected")
+.attr("href", "<%= root_path %>")
+
+$("#accept-btn-<%=@user.username%>")
+.hide()

@@ -7,6 +7,7 @@ class RelationshipsController < ApplicationController
       format.js do
         format.html { redirect_to root_path }
         @follower_count = @user.follower_count
+
         if @user.private?
           render 'users/pending_follow'
         else

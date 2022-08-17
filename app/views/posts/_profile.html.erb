@@ -1,0 +1,14 @@
+<%@posts.each do |post|%>
+  <div class='col-4'>
+    <div class='post post-square' style="background: url(<%= cl_image_path(post.images[0].key) %>) no-repeat center top">
+      <%= link_to post_path(post) do %>
+        <div class="post-stats">
+          <div class="inner-post-stats">
+            <i class="fa fa-heart"></i> <%= post.likes_count%>
+            <i class="fa fa-comment m-l-15"></i> <%= post.comments_count%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<%end%>

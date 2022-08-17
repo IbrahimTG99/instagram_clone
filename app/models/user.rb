@@ -1,8 +1,9 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  include PgSearch::Model
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
 
   validates :username, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9_]+\z/ }
   validates :first_name, presence: true, length: { minimum: 3, maximum: 20 }, format: { with: /\A[a-zA-Z]+\z/ }
@@ -13,6 +14,7 @@ class User < ApplicationRecord
   has_many :stories, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+
   # 'follows' relationship objects where the user is being followed.
   has_many :follower_relationships, foreign_key: :following_id, class_name: :Follow, dependent: :destroy,
                                     inverse_of: :following
@@ -23,6 +25,7 @@ class User < ApplicationRecord
   has_many :following_relationships, foreign_key: :follower_id, class_name: :Follow, dependent: :destroy,
                                      inverse_of: :follower
   has_many :following, -> { Follow.accepted }, through: :following_relationships
+
 
   has_one_attached :avatar, dependent: :destroy
   after_commit :add_default_avatar, on: %i[create update]
@@ -45,7 +48,6 @@ class User < ApplicationRecord
 
   def follow(user_id)
     following_relationships.create(following_id: user_id)
-
     following = User.find(user_id)
     return true if following.private?
 
@@ -57,15 +59,28 @@ class User < ApplicationRecord
   end
 
   def following?(user_id)
-    following_relationships.where(following_id: user_id).exists?
+    following.include?(User.find(user_id))
+  end
+
+  def pending?(user_id)
+    @relationship = following_relationships.find_by(following_id: user_id)
+    @relationship.status == 'pending' unless @relationship.nil?
   end
 
   def follower_count
-    follower_relationships.count
+    followers.count
   end
 
   def following_count
     following_relationships.count
+  end
+
+  def self.text_search(query)
+    if query.present?
+      where('username ILIKE ?', "%#{query}%")
+    else
+      all
+    end
   end
 
   private
@@ -74,7 +89,7 @@ class User < ApplicationRecord
     return if avatar.attached?
 
     avatar.attach(
-      io: File.open(Rails.root.join('default_profile.jpg')),
+      io: File.open(Rails.root.join('app/assets/images/default_profile.jpg')),
       filename: 'default_profile.jpg',
       content_type: 'image/jpg'
     )

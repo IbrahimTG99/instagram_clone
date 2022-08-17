@@ -6,12 +6,13 @@ class PostsController < ApplicationController
   end
 
   def create
+    authorize Post
     @post = Post.create(post_params)
-    @post.user = current_user if user_signed_in?
+    @post.user = current_user
     if @post.save
       redirect_to root_path, flash: { success: 'Post created!' }
     else
-      redirect_to new_post_path, flash: { error: 'Post not created!' }
+      render :new, flash: { danger: 'Post not created!' }
     end
   end
 
@@ -21,13 +22,16 @@ class PostsController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    authorize @post
+  end
 
   def update
+    authorize @post
     if @post.update(post_params)
       redirect_to root_path, flash: { success: 'Post updated!' }
     else
-      redirect_to edit_post_path, flash: { error: 'Post not updated!' }
+      redirect_to edit_post_path, flash: { danger: 'Post not updated!' }
     end
   end
 

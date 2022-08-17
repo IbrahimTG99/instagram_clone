@@ -5,20 +5,34 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+- Ruby version
+  2.7.2
 
-* System dependencies
+- System dependencies
+  must have redis, postgres, and rails installed
+- Database
+  postgres
 
-* Configuration
+- Application URL
+  http://localhost:3000
 
-* Database creation
+- Application logs
+  must be available at /logs/production.log
 
-* Database initialization
+- Configuration
+  must be available at /config/application.yml
 
-* How to run the test suite
+- Database initialization
+  run `rake db:init`
 
-* Services (job queues, cache servers, search engines, etc.)
+- Database creation
+  run `rake db:create`
 
-* Deployment instructions
+- Database seed
+  run `rake db:seed`
 
-* ...
+- Database migration
+  run `rake db:migrate`
+
+- Application start
+  run `rails s`

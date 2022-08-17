@@ -1,16 +1,15 @@
 class LikesController < ApplicationController
   def create
     @post_id = params[:post_id]
-    like_exists = Like.where(post_id: @post_id, user_id: current_user.id)
+    like_exists = Like.find_or_initialize_by(user_id: current_user.id, post_id: @post_id)
     respond_to do |format|
       format.js do
-        if like_exists.exists?
-          like_exists.first.destroy
-          @success = false
-        else
-          @like = Like.new(post_id: @post_id, user_id: current_user.id)
-          @success = @like.save ? true : false
-        end
+        @success = if like_exists.persisted?
+                     like_exists.destroy
+                     false
+                   else
+                     like_exists.save ? true : false
+                   end
         update_view
       end
     end

@@ -15,7 +15,7 @@
       <%= time_ago_in_words story.created_at%> ago
     </small>
   </div>
-  <% if can_edit_story? story.id %>
+  <% if policy(story).destroy? %>
     <%= link_to 'delete', story, method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure?' } %>
   <% end %>
 </div>

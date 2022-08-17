@@ -6,12 +6,14 @@
     <div class='col-8'>
       <h1> <%=@user.full_name%> </h1>
       <span>
-        <% if can_edit_profile? @user.id %>
+        <% if policy(@user).update? %>
           <%= link_to edit_user_registration_path(current_user.username), class: "btn btn-outline-secondary" do %>
             <i class="fas fa-edit"></i> Edit Profile
           <% end %>
         <% elsif following? @user.id %>
           <%= link_to "Following", unfollow_user_path, remote: true, class: "btn unfollow-btn", id: 'unfollow-btn-'+@user.username, method: :post%>
+        <% elsif pending? @user.id %>
+          <%= link_to "Pending", unfollow_user_path, remote: true, class: "btn unfollow-btn", id: 'unfollow-btn-'+@user.username, method: :post%>
         <% else %>
           <%= link_to "Follow", follow_user_path, remote: true, class: "btn follow-btn", id: 'follow-btn-'+@user.username, method: :post%>
         <% end %>

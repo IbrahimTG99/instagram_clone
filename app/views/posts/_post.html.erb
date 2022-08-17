@@ -41,7 +41,7 @@
       <% end %>
     </div>
   </div>
-  <% if can_edit_post? post.id %>
+  <% if policy(post).update? %>
     <%= link_to 'edit', edit_post_path(post), class: 'btn btn-outline-secondary' %>
     <%= link_to 'delete', post, method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure?' } %>
   <% end %>

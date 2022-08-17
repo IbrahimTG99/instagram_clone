@@ -6,12 +6,13 @@ class StoriesController < ApplicationController
   end
 
   def create
+    authorize Story
     @story = Story.create(story_params)
-    @story.user = current_user if user_signed_in?
+    @story.user = current_user
     if @story.save
       redirect_to root_path, flash: { success: 'story created!' }
     else
-      redirect_to new_story_path, flash: { error: 'story not created!' }
+      render :new, flash: { danger: 'story not created!' }
     end
   end
 
@@ -20,6 +21,8 @@ class StoriesController < ApplicationController
   end
 
   def destroy
+    authorize @story
+    @story.image.purge
     @story.destroy
     redirect_to root_path, flash: { success: 'story deleted!' }
   end
