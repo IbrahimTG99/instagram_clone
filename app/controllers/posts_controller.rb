@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
+
   def index
     redirect_to root_path
   end
@@ -36,15 +37,19 @@ class PostsController < ApplicationController
 
   def destroy
     authorize @post
-    @post.images.each(&:purge)
-    @post.destroy
-    redirect_to root_path, flash: { success: 'Post deleted!' }
+    ActiveRecord::Base.transaction do
+      @post.destroy
+      @post.comments.destroy_all
+      @post.likes.destroy_all
+      @post.images.each(&:purge)
+      redirect_to root_path, flash: { success: 'Post deleted!' }
+    end
   end
 
   private
 
   def set_post
-    @post = Post.find(params[:id]) if params[:id].present?
+    @post = Post.find(params[:id])
   end
 
   def post_params

@@ -1,19 +1,23 @@
 Rails.application.routes.draw do
-  get 'relationships/follow_user'
-  get 'relationships/unfollow_user'
-  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users
 
   get 'profile/:username' => 'users#profile', as: :profile
 
-  post ':username/follow_user', to: 'relationships#follow_user', as: :follow_user
-  post ':username/unfollow_user', to: 'relationships#unfollow_user', as: :unfollow_user
-  post ':username/accept_follow', to: 'relationships#accept_follow', as: :accept_follow
-  post ':username/reject_follow', to: 'relationships#reject_follow', as: :reject_follow
-
-  get 'search_user/:q' => 'users#search_user', as: :search_user
-
   root to: 'users#index'
+
+  resources :users do
+    collection do
+      get 'search/:q' => 'users#search', as: :search
+    end
+
+    member do
+      post 'follow', to: 'relationships#follow_user'
+      post 'unfollow', to: 'relationships#unfollow_user'
+      post 'accept_follow', to: 'relationships#accept_follow'
+      post 'reject_follow', to: 'relationships#reject_follow'
+    end
+  end
 
   resources :posts do
     resources :likes, only: %i[new create destroy], shallow: true

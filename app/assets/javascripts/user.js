@@ -5,7 +5,7 @@ $(document).ready(function () {
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     limit: 10,
-    remote: { url: "/search_user/%QUERY", wildcard: "%QUERY" },
+    remote: { url: "/users/search/%QUERY", wildcard: "%QUERY" },
   });
   bloodhound.initialize();
 

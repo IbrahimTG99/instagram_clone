@@ -4,7 +4,9 @@ $("#reject-btn-<%=@user.username%>")
 $("#accept-btn-<%=@user.username%>")
 .attr("class", "btn unfollow-btn")
 .text("Accpeted")
-.attr("href", "<%= reject_follow_path %>")
+
+.attr("href", "<%= reject_follow_user_path %>")
+
 .attr("id", "reject-btn-<%=@user.username%>");
 
 

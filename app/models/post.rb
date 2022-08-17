@@ -14,7 +14,7 @@ class Post < ApplicationRecord
   private
 
   def images_format
-    return unless images.attached?
+    errors.add(:images, 'missing') unless images.attached?
 
     images.each do |image|
       errors.add(:images, 'must be a JPEG or PNG') unless image.content_type.in?(%w[image/jpeg image/png image/jpg])

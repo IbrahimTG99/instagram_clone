@@ -4,13 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # validations
+
   validates :username, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9_]+\z/ }
   validates :first_name, presence: true, length: { minimum: 3, maximum: 20 }, format: { with: /\A[a-zA-Z]+\z/ }
   validates :last_name, presence: true, length: { minimum: 3, maximum: 20 }, format: { with: /\A[a-zA-Z]+\z/ }
   validates :email, presence: true, uniqueness: true
 
-  # relationships
   has_many :posts, dependent: :destroy
   has_many :stories, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -19,16 +18,18 @@ class User < ApplicationRecord
   # 'follows' relationship objects where the user is being followed.
   has_many :follower_relationships, foreign_key: :following_id, class_name: :Follow, dependent: :destroy,
                                     inverse_of: :following
-  # The next line goes the next step and accesses a user's followers through those relationships
-  has_many :followers, -> { where('follows.status = 1') }, through: :follower_relationships, source: :follower
+  # The next line goes the next step and accesses a user's followers through those relationships which are 'accepted'.
+  has_many :followers, -> { Follow.accepted }, through: :follower_relationships
 
-  #  for the 'following' relationships
+  #  same for the 'following' relationships
   has_many :following_relationships, foreign_key: :follower_id, class_name: :Follow, dependent: :destroy,
                                      inverse_of: :follower
-  has_many :following, -> { where('follows.status = 1') }, through: :following_relationships, source: :following
+  has_many :following, -> { Follow.accepted }, through: :following_relationships
+
 
   has_one_attached :avatar, dependent: :destroy
   after_commit :add_default_avatar, on: %i[create update]
+
   def liked?(post)
     likes.where(post_id: post.id).exists?
   end
@@ -47,11 +48,9 @@ class User < ApplicationRecord
 
   def follow(user_id)
     following_relationships.create(following_id: user_id)
-    # check if user profile is private
     following = User.find(user_id)
     return true if following.private?
 
-    # set following_relationships status to 'accepted')
     following_relationships.find_by(following_id: user_id).update(status: 'accepted')
   end
 

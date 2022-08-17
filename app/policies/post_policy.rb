@@ -5,6 +5,10 @@ class PostPolicy < ApplicationPolicy
     user.present?
   end
 
+  def new?
+    create?
+  end
+
   def update?
     user.present? && (record.user == user)
   end
