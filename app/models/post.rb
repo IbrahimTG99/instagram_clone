@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   default_scope { order created_at: :desc }
   validates :user_id, presence: true
-  validates :images, presence: true, length: { minimum: 1 , maximum: 10 }
+  validates :images, presence: true, length: { minimum: 1, maximum: 10 }
 
   belongs_to :user
   has_many :likes, dependent: :destroy
@@ -11,10 +11,6 @@ class Post < ApplicationRecord
   # defining scope using lamba function that returns followed users posts
   scope :of_followed_users, ->(following_users) { where user_id: following_users }
 
-<<<<<<< Updated upstream
-  def total_likes
-    likes.count
-=======
   private
 
   def images_format
@@ -23,6 +19,5 @@ class Post < ApplicationRecord
     images.each do |image|
       errors.add(:images, 'must be a JPEG or PNG') unless image.content_type.in?(%w[image/jpeg image/png image/jpg])
     end
->>>>>>> Stashed changes
   end
 end

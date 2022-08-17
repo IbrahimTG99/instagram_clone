@@ -32,10 +32,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-<<<<<<< Updated upstream
-    @post.destroy
-    redirect_to root_path, flash: { success: 'Post deleted!' }
-=======
     authorize @post
     ActiveRecord::Base.transaction do
       @post.destroy
@@ -44,7 +40,6 @@ class PostsController < ApplicationController
       @post.images.each(&:purge)
       redirect_to root_path, flash: { success: 'Post deleted!' }
     end
->>>>>>> Stashed changes
   end
 
   private

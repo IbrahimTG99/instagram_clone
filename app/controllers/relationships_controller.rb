@@ -7,15 +7,11 @@ class RelationshipsController < ApplicationController
       format.js do
         format.html { redirect_to root_path }
         @follower_count = @user.follower_count
-<<<<<<< Updated upstream
-        render 'users/follow_user'
-=======
         if @user.private?
           render 'users/pending_follow'
         else
           render 'users/follow_user'
         end
->>>>>>> Stashed changes
       end
     end
   end
@@ -31,8 +27,6 @@ class RelationshipsController < ApplicationController
       end
     end
   end
-<<<<<<< Updated upstream
-=======
 
   def accept_follow
     @relationship = current_user.follower_relationships.find_by! follower_id: @user.id
@@ -61,5 +55,4 @@ class RelationshipsController < ApplicationController
   def set_user
     @user = User.find_by! id: params[:id]
   end
->>>>>>> Stashed changes
 end

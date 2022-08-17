@@ -13,16 +13,6 @@ class UsersController < ApplicationController
     @posts = @user.posts
   end
 
-<<<<<<< Updated upstream
-  def set_user
-    @user = User.find_by(username: params[:username])
-  end
-
-  def search_user
-    @find = User.where('username LIKE ?', "%#{params[:q]}%")
-    render json: @find
-  end
-=======
   def search
     @find = User.text_search(params[:q])
     render json: @find
@@ -54,5 +44,4 @@ class UsersController < ApplicationController
     @follower_suggestions = User.where.not(id: following_ids).limit(4) - [current_user]
     @pending_follows = current_user.follower_relationships.where(status: 'pending')
   end
->>>>>>> Stashed changes
 end
