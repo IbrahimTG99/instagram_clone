@@ -40,6 +40,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jquery-rails'
 
+# cloudinary gem for image uploads
+gem 'cloudinary', require: false
+gem 'activestorage-cloudinary-service'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -71,10 +74,6 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # linter
 gem 'rubocop'
 gem 'rubocop-rails'
-
-# uploading images to amazon s3
-# gem 'carrierwave'
-# gem 'fog', '~> 1.42'
 
 # uploading images
 gem 'paperclip'
