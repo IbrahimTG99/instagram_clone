@@ -19,8 +19,6 @@ class StoriesController < ApplicationController
     @story = Story.new
   end
 
-  def show; end
-
   def destroy
     @story.destroy
     redirect_to root_path, flash: { success: 'story deleted!' }
@@ -29,7 +27,7 @@ class StoriesController < ApplicationController
   private
 
   def set_story
-    @story = Story.find(params[:id]) if params[:id].present?
+    @story = Story.find(params[:id])
   end
 
   def story_params

@@ -1,7 +1,11 @@
 <%=form_for @story, html: {multipart: true} do |f|%>
   <div class="form-group">
     <%=f.label :image%>
+<<<<<<< Updated upstream
     <%= f.file_field :image, class:"form-control" %>
+=======
+    <%= f.file_field :image, direct_upload: true, class:"form-control", accept: "image/png, image/jpg, image/jpeg" %>
+>>>>>>> Stashed changes
   </div>
   <br>
   <div class="form-group">

@@ -1,4 +1,4 @@
 :schedule:
   remove_stories:
-    every: 5 minutes
+    every: 1 minute
     class: RemoveStoriesWorker

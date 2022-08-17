@@ -31,6 +31,7 @@
   </div>
   <br>
   <div class='row profile-posts'>
+<<<<<<< Updated upstream
       <%@posts.each do |post|%>
         <div class='col-4'>
           <div class='post post-square' style="background: url(<%= cl_image_path(post.images[0].key) %>) no-repeat center top">
@@ -45,5 +46,12 @@
           </div>
         </div>
       <%end%>
+=======
+    <% if following? @user.id%>
+        <%= render "posts/profile" %>
+    <% elsif !@user.private || policy(@user).update?  %>
+        <%= render "posts/profile" %>
+    <% end %>
+>>>>>>> Stashed changes
   </div>
 </div>

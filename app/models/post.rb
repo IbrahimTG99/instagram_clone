@@ -11,7 +11,18 @@ class Post < ApplicationRecord
   # defining scope using lamba function that returns followed users posts
   scope :of_followed_users, ->(following_users) { where user_id: following_users }
 
+<<<<<<< Updated upstream
   def total_likes
     likes.count
+=======
+  private
+
+  def images_format
+    errors.add(:images, 'missing') unless images.attached?
+
+    images.each do |image|
+      errors.add(:images, 'must be a JPEG or PNG') unless image.content_type.in?(%w[image/jpeg image/png image/jpg])
+    end
+>>>>>>> Stashed changes
   end
 end

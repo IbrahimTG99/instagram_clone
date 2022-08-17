@@ -50,10 +50,6 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
   end
 
-  def ensure_user_is_owner
-    return true if @comment.user == current_user
-  end
-
   def set_comment
     @comment = Comment.find(params[:id])
   end
