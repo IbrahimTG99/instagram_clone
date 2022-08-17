@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post ':username/follow_user', to: 'relationships#follow_user', as: :follow_user
   post ':username/unfollow_user', to: 'relationships#unfollow_user', as: :unfollow_user
   post ':username/accept_follow', to: 'relationships#accept_follow', as: :accept_follow
+  post ':username/reject_follow', to: 'relationships#reject_follow', as: :reject_follow
 
   get 'search_user/:q' => 'users#search_user', as: :search_user
 
