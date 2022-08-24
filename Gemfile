@@ -64,9 +64,19 @@ gem 'pg_search'
 # client side validation
 gem 'client_side_validations'
 
+# policies
+gem "pundit", "~> 2.2"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  # add rspec and its dependencies
+  gem 'rspec-rails', '~> 3.7'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'shoulda'
+  gem 'shoulda-callback-matchers'
+  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -87,10 +97,12 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  # simplecov
+  gem 'simplecov', require: false
+  # test after commit
+  # gem 'test_after_commit'
 end
-
-gem "pundit", "~> 2.2"

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:profile]
+  before_action :set_user, only: %i[profile destroy]
   def index
     load_index
     load_suggestions
