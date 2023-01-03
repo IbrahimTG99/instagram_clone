@@ -24,6 +24,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_model_serializers (0.10.13)
+      actionpack (>= 4.1, < 7.1)
+      activemodel (>= 4.1, < 7.1)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (5.2.8)
       activesupport (= 5.2.8)
       globalid (>= 0.3.6)
@@ -70,6 +75,8 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    case_transform (0.2)
+      activesupport
     character_set (1.6.0)
       sorted_set (~> 1.0)
     childprocess (4.1.0)
@@ -140,6 +147,7 @@ GEM
       character_set (~> 1.4)
       regexp_parser (~> 2.5)
       regexp_property_values (~> 1.0)
+    jsonapi-renderer (0.2.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -178,6 +186,8 @@ GEM
     raabro (1.4.0)
     racc (1.6.0)
     rack (2.2.3.1)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.8)
@@ -352,6 +362,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  active_model_serializers
   activestorage-cloudinary-service
   bootsnap (>= 1.1.0)
   bootstrap-sass (~> 3.4.1)
@@ -374,6 +385,7 @@ DEPENDENCIES
   pg_search
   puma (~> 3.11)
   pundit (~> 2.2)
+  rack-cors
   rails (~> 5.2.8)
   rails-controller-testing
   rspec-rails (~> 3.7)
