@@ -1,5 +1,6 @@
 class RelationshipsController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: %i[follow_user unfollow_user accept_follow reject_follow]
+
   def follow_user
     return unless current_user.follow @user.id
 

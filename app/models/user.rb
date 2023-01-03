@@ -5,9 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9_]+\z/ }
-  validates :first_name, presence: true, length: { minimum: 3, maximum: 20 }, format: { with: /\A[a-zA-Z]+\z/ }
-  validates :last_name, presence: true, length: { minimum: 3, maximum: 20 }, format: { with: /\A[a-zA-Z]+\z/ }
-  validates :email, presence: true, uniqueness: true
+  validates :first_name, presence: true, length: { minimum: 2, maximum: 20 }, format: { with: /\A[a-zA-Z]+\z/ }
+  validates :last_name, presence: true, length: { minimum: 2, maximum: 20 }, format: { with: /\A[a-zA-Z]+\z/ }
+  validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :password_confirmation, presence: true
 
   has_many :posts, dependent: :destroy
   has_many :stories, dependent: :destroy
@@ -34,14 +35,6 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def avatar_thumbnail
-    if avatar.attached?
-      avatar.variant(resize: '150x150')
-    else
-      'default_profile.jpg'
-    end
   end
 
   def follow(user_id)

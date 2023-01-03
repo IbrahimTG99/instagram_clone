@@ -1,9 +1,5 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: %i[show destroy]
-
-  def index
-    redirect_to root_path
-  end
+  before_action :set_story, only: :destroy
 
   def create
     authorize Story

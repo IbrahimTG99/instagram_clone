@@ -24,5 +24,13 @@ Rails.application.routes.draw do
     resources :comments, only: %i[new create destroy edit update], shallow: true
   end
 
-  resources :stories, only: %i[new create show destroy]
+  resources :stories, only: %i[new create destroy]
+
+  namespace :api do
+    namespace :v1 do
+      resources :stories, only: %i[index show]
+      resources :relationships, only: %i[index]
+    end
+  end
+
 end

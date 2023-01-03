@@ -5,7 +5,7 @@
         <%= cl_image_tag(follow.follower.avatar.key, width: 50, height: 50, crop: :fill, class:"img-circle profile-pic") %>
       </div>
       <div class="col-10">
-        <%= link_to follow.follower.username, profile_path(follow.follower.id), class:"text-dark" %>
+        <%= link_to follow.follower.username, profile_path(follow.follower.username), class:"text-dark" %>
         <div class="float-end">
           <%= link_to "Accept", accept_follow_user_path(follow.follower.id), remote: true, class: "btn follow-btn", id: 'accept-btn-'+follow.follower.username, method: :post%>
           <%= link_to "Cancel", reject_follow_user_path(follow.follower.id), remote: true, class: "btn unfollow-btn", id: 'reject-btn-'+follow.follower.username, method: :post%>
