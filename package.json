@@ -3,5 +3,6 @@
   "private": true,
   "dependencies": {
     "@client-side-validations/client-side-validations": "^0.3.0"
-  }
+  },
+  "packageManager": "yarn@1.22.18"
 }
