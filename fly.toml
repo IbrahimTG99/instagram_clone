@@ -1,0 +1,8 @@
+# fly.toml file generated for railsgram on 2023-04-15T05:23:22+05:00
+
+app = "railsgram"
+primary_region = "sin"
+
+[[statics]]
+  guest_path = "/rails/public"
+  url_prefix = "/"

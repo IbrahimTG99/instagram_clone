@@ -112,3 +112,5 @@ group :test do
   # test after commit
   # gem 'test_after_commit'
 end
+
+gem "dockerfile-rails", ">= 1.2", :group => :development
